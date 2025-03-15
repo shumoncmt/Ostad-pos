@@ -23,3 +23,4 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
     }
 }
+//Seeder Update Project
