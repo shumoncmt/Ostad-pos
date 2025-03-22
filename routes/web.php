@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 // Route::get('/', function () {
@@ -27,4 +32,33 @@ Route::middleware(TokenVerificationMiddleware::class)->group(function(){
     Route::get('/DashboardPage', [UserController::class, 'DashboardPage']);
     Route::get('/user-logout', [UserController::class, 'UserLogout']);
 
+    //Category all routes
+    Route::post('/create-category', [CategoryController::class, 'CreateCategory'])->name('category.create');
+    Route::get('/list-category', [CategoryController::class, 'CategoryList'])->name('category.list');
+    Route::post('/category-by-id', [CategoryController::class, 'CategoryById']);
+    Route::post('/update-category', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
+    Route::get('/delete-category/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
+
+    //Product all routes
+    Route::post('/create-product', [ProductController::class, 'CreateProduct'])->name('CreateProduct');
+    Route::get('/list-product', [ProductController::class, 'ProductList'])->name('ProductList');
+    Route::post('/product-by-id', [ProductController::class, 'ProductById'])->name('ProductById');
+    Route::post('/update-product', [ProductController::class, 'ProductUpdate'])->name('ProductUpdate');
+    Route::get('/delete-product/{id}', [ProductController::class, 'ProductDelete'])->name('ProductDelete');
+
+    //Profile all routes
+    Route::post('/create-customer', [CustomerController::class, 'CreateCustomer'])->name('CreateCustomer');
+    Route::get('/list-customer', [CustomerController::class, 'CustomerList'])->name('CustomerList');
+    Route::post('/customer-by-id', [CustomerController::class, 'CustomerById'])->name('CustomerById');
+    Route::post('/update-customer', [CustomerController::class, 'CustomerUpdate'])->name('CustomerUpdate');
+    Route::get('/delete-customer/{id}', [CustomerController::class, 'CustomerDelete'])->name('CustomerDelete');
+
+    //Invoice all routes
+    Route::post('/invoice-create', [InvoiceController::class, 'InvoiceCreate'])->name('InvoiceCreate');
+    Route::get('/invoice-list', [InvoiceController::class, 'InvoiceList'])->name('InvoiceList');
+    Route::post('/invoice-details', [InvoiceController::class, 'InvoiceDetails'])->name('InvoiceDetails');
+    Route::get('/invoice-delete/{id}', [InvoiceController::class, 'InvoiceDelete'])->name('InvoiceDelete');
+
+    //Dashboard Summary
+    Route::get('/dashboard-summary', [DashboardController::class, 'DashboardSummary'])->name('DashboardSummary');
 });
